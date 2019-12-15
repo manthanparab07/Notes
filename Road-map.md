@@ -7,7 +7,7 @@
 |       **BASH**        |    **NodeJS**     |
 |      **Python**       |    **Docker**     |
 |       **JAVA**        |    **Android**    |
-|    **JavaScript**     |   **OpenStack**   |
+|    **JavaScript**     |       **-**       |
 |     **HTML/CSS**      |  **Kubernetes**   |
 
 |   Databases    |

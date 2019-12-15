@@ -62,7 +62,7 @@ Both are equivalent
  p 		puts the text that is in buffer after  cursor position
  P 		puts the text that is in buffer before cursor position
 
- xp		trans(x)pose(p) swap two letters before and current cursor position
+ xp		trans(x)pose(p) swap two letters after and current cursor position
 
  [n]yy		copy n lines to the buffer 
 
@@ -88,4 +88,92 @@ Both are equivalent
 
  [n]G		Go to line no n
  ``		will return to original position
+
+ 
+vi + file	  Opens file at last line.
+vi +/pattern file Opens file at line which has first occurance pattern
+
+ vi also allows you to place yanks (copied text) into buffers identified by letters. 
+ You can fill up to 26 (a–z) buffers with yanked text and restore that text with a put command at any time in your editing session.
+
+ "[n]p		recover last n deletions from the buffer
+		. will increment the n i.e buffer no.
+
+ "[%][n]yy	yank n lines into buffer named % -> [a-z]
+ "[%][n]P	put  n lined from buffer named % before the cursor
+ "[%][n]p	put  n lined from buffer named % after the cursor
+
+ vim is an extension on "ex" editor which used to work on line by line.
+ Useful for editing , moving and copying in bulk
+
+ :1p		Print and move focus to line 1
+ :1		move focus to line 1 and print it
+ :1,3p		print lines from 1 to 3
+
+ :s/pattern/string/	replace pattern with string on current working line 
+ :[n]s/pattern/string/	replace pattern with string on line n
+ 
+ :vi		switches to vi
+ 
+ ex commands are used in vim by using :command
+
+ as each ex command requires line address which can be specified using	
+	1. explicit line number
+	2. symbol which indicate relative position
+	3. search pattern as address
+
+1. explicit line number
+	first display line number by set nu
+   Usage
+	:3,7d	  delete lines 3 through 7
+	:3,7m11   move lines 3 through 7 to follow line 11
+	:3,7co11  copy lines 3 through 7 and put after line 11 
+
+ :%d	delete all lines from the file
+
+ :/pattern/d	Delete the next line containing pattern.
+ :/pattern/+d 	Delete the line below the next line containing pattern.
+
+ Global Search
+
+ :g/pattern		Moves to the last occurance of the pattern
+ :g/pattern/p		finds and display all the lines with the pattern
+ :g!/pattern/p		finds and display all the lines without the pattern
+ :60,124g/pattern/p 	Finds and displays any lines between lines 60 and 124 containing pattern.
+
+ Multiple ex command can be types by seperator | i.e /s/pattern/ | set nu
+
+ :e filename		vim switches to edit file filename after saving the current 
+ Ctrl ^			Allows to switch between multiple files only after saving current
+
+ -- Editing between files 
+ As named buffer are not cleared when a new file is loaded into the vi buffer thus allowing copy , moving across various files
+
+	"f4yy -> :w -> :e filename -> "fp
+
+ Copies 4 lines from current file to filename using named buffer f
+
+ -- Global Replacement
+
+ :s/old/new/	replace first occurance on current line
+ :s/old/new/g	replace all   occurance on current line
+
+ :2,7s/old/new/g replace all occurance between line 2 and 7
+
+ :1,$s/old/new/g 	replace all occurance from the file
+ :%s/old/new/g 		replace all occurance from the file
+
+ :1,$s/old/new/gc confirm before replace occurance from the file
+
+ -- Context Sensitive Replacement
+
+ Useful to first find lines matching a pattern and then operating on matched lines only
+ Ex. find all those files whose size > 4096 replace user with user1
+
+ :g/pattern/s/old/new/g 
+ 
+  first g tells that it should operate on entire file and then last g indicates that it should operate on 
+  all occurance on each file.
+  Similarly d , mo , co can be used to instead 
+
 
