@@ -1,0 +1,20 @@
+>   ### Road-map
+
+| Programming Languages | Tools/ Frameworks |
+| :-------------------: | :---------------: |
+|       **C/C++**       |      **Git**      |
+|      **Golang**       |      **vim**      |
+|       **BASH**        |    **NodeJS**     |
+|      **Python**       |    **Docker**     |
+|       **JAVA**        |    **Android**    |
+|    **JavaScript**     |   **OpenStack**   |
+|     **HTML/CSS**      |  **Kubernetes**   |
+
+|   Databases    |
+| :------------: |
+|   **MySQL**    |
+| **PostgreSQL** |
+|   **Redis**    |
+|  **MoongoDB**  |
+| **Cassandra**  |
+
