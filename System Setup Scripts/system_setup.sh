@@ -1,6 +1,7 @@
 #!/bin/bash
 
-sudo apt install vim tree
+echo "Installing vim tree tmux"
+sudo apt install vim tree tmux
 
 # or run:
 # sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
@@ -27,4 +28,18 @@ sudo apt-get install code # or code-insiders
 
 git config --global core.editor vim
 
+# copying configuration files for vim , bashrc
 
+cp .vimrc $HOME
+echo "Copied vim configuration!!"
+
+echo "Now Inorder to apply vim theme"
+echo "**********************Important****************************"
+echo "Now run :PlugInstall to install the plugins."
+
+cp .tmux* $HOME
+echo "Copied tmux configuration!!"
+
+
+echo "Now the computer is good to go"
+echo "Enjoy"
