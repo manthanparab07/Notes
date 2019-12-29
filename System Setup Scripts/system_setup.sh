@@ -1,45 +1,44 @@
 #!/bin/bash
 
-echo "Installing vim tree tmux"
-sudo apt install vim tree tmux
+echo "Saving Current Working Directory .."
+current_path=$(pwd)
 
-# or run:
-# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
 
 wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
 
 # add Typora's repository
 
 sudo add-apt-repository 'deb https://typora.io/linux ./'
-
 sudo apt-get update
 
 # install typora
 
-sudo apt-get install typora golang
+echo "Installing neovim git tree tmux golang typora"
 
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-
-sudo apt-get install apt-transport-https
-sudo apt-get update
-sudo apt-get install code # or code-insiders
-
-git config --global core.editor vim
-
-# copying configuration files for vim , bashrc
-
-cp .vimrc $HOME
-echo "Copied vim configuration!!"
-
-echo "Now Inorder to apply vim theme"
-echo "**********************Important****************************"
-echo "Now run :PlugInstall to install the plugins."
-
-cp .tmux* $HOME
-echo "Copied tmux configuration!!"
+sudo apt install neovim git tree tmux golang typora
 
 
-echo "Now the computer is good to go"
-echo "Enjoy"
+git config --global core.editor nvim
+
+echo "Installing Plugin Manager ..."
+
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    
+echo "Creating NeoVim Configuration files"
+
+cd
+mkdir .config/nvim/
+touch .config/nvim/init.vim
+
+echo "Adding Auto-Pair Plugin ..."
+mkdir .config/nvim/plugin/
+
+echo "Configuration Files ..."
+
+cp auto-pairs.vim $HOME/.config/nvim/plugin/
+cp vim.config $HOME/.config/nvim/init.vim
+
+echo "Work Done"
+
+

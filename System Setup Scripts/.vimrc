@@ -12,9 +12,10 @@ call plug#end()
 colorscheme gruvbox
 
 set background=dark    " Setting dark mode
+" set background=light " Setting light mode
 
 set nu
-
+set ignorecase
 set autoindent
 
 " activate the plugin

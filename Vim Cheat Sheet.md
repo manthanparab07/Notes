@@ -156,7 +156,7 @@
  :g/pattern/s/old/new/g 
 ```
 
--   first g tells that it should operate on entire file and then last g indicates that it should operate on all occurance on each file.
+-   first g tells that it should operate on entire file and then last g indicates that it should operate on all occurrence on each file.
 
 -   Similarly d , mo , co can be used to instead
 
