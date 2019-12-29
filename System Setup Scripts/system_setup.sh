@@ -36,8 +36,11 @@ mkdir .config/nvim/plugin/
 
 echo "Configuration Files ..."
 
+cd $current_path
 cp auto-pairs.vim $HOME/.config/nvim/plugin/
 cp vim.config $HOME/.config/nvim/init.vim
+cp .tmux.* $HOME
+
 
 echo "Work Done"
 
