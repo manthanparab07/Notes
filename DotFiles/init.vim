@@ -13,6 +13,10 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
+
+" dependencies for code format 
+Plug 'rhysd/vim-clang-format'
+Plug 'maksimr/vim-jsbeautify'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -122,11 +126,12 @@ set noswapfile
 
 set t_Co=256                " 256 colors terminal
 
+" Quit NerdTree on Opening a File
+let NERDTreeQuitOnOpen = 1
 
-" Forcing myself to use hjkl instead of arrows
+" Quit on Open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+" Specify NerdTree Window
+let g:NERDTreeWinSize=17
 

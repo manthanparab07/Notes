@@ -15,7 +15,7 @@ sudo apt-get update
 
 echo "Installing neovim git tree tmux golang typora"
 
-sudo apt install neovim git tree tmux golang typora
+sudo apt install neovim git tree tmux golang typora pip
 
 
 git config --global core.editor nvim
@@ -41,6 +41,8 @@ cp auto-pairs.vim $HOME/.config/nvim/plugin/
 cp vim.config $HOME/.config/nvim/init.vim
 cp .tmux.* $HOME
 
+# for code-format
+pip install yapf
 
 echo "Work Done"
 
