@@ -10,13 +10,14 @@ wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
 
 sudo add-apt-repository 'deb https://typora.io/linux ./'
 sudo apt-get update
+sudo apt-get upgrade
 
 # install typora
 
 echo "Installing neovim git tree tmux golang typora"
 
-sudo apt install neovim git tree tmux golang typora pip
-
+sudo apt install neovim git tree tmux golang typora pip npm
+sudo npm -g install js-beautify
 
 git config --global core.editor nvim
 
