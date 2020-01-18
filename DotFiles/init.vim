@@ -24,6 +24,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " For Vim go 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" For Python AutoComplete
+Plug 'davidhalter/jedi-vim'
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -237,3 +240,12 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 let g:go_def_mapping_enabled = 0
 
 
+set statusline^=%{coc#status()}
+
+" jedi config
+
+" use tabs instead of buffers
+let g:jedi#use_tabs_not_buffers = 1
+
+" Hides Doc String pop up in python 
+autocmd FileType python setlocal completeopt-=preview
