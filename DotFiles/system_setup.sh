@@ -9,6 +9,9 @@ wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
 # add Typora's repository
 
 sudo add-apt-repository 'deb https://typora.io/linux ./'
+sudo add-apt-repository ppa:neovim-ppa/stable
+
+
 sudo apt-get update
 sudo apt-get upgrade
 
@@ -18,7 +21,9 @@ echo "Installing neovim git tree tmux golang typora"
 
 sudo apt install neovim git tree tmux golang typora pip npm
 sudo npm -g install js-beautify
-
+sudo apt-get install fuse libfuse2 git python3-pip ack-grep -y\
+sudo pip install tkinter
+sudo pip install jedi
 git config --global core.editor nvim
 
 echo "Installing Plugin Manager ..."
@@ -44,6 +49,9 @@ cp .tmux.* $HOME
 
 # for code-format
 pip install yapf
+
+cp .zshrc $HOME/.zshrc
+cp .antigenrc $HOME/.antigenrc
 
 echo "Work Done"
 
