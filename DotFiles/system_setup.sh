@@ -53,6 +53,9 @@ pip install yapf
 cp .zshrc $HOME/.zshrc
 cp .antigenrc $HOME/.antigenrc
 
+mkdir $HOME/.zsh
+cp antigen.zsh $HOME/.zsh
+
 echo "Work Done"
 
 
