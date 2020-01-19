@@ -19,7 +19,7 @@ sudo apt-get upgrade
 
 echo "Installing neovim git tree tmux golang typora"
 
-sudo apt install neovim git tree tmux golang typora pip npm
+sudo apt install neovim git tree tmux golang typora pip npm zsh-antigen
 sudo npm -g install js-beautify
 sudo apt-get install fuse libfuse2 git python3-pip ack-grep -y\
 sudo pip install tkinter
