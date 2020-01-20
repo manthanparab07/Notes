@@ -210,3 +210,39 @@ Communication b/w services can be **synchronous** ( HTTP ) as **REST**   or as a
 -    The instance which has failed is being flagged in the registry. This means that a reference to that instance will not be handed  back in response to a request.
 -   If the requested microservice is running then it's instance is returned to the requester.
 
+#### Monolithic Architecture 
+
+-   Traditional Software were written in monolithic architecture i.e 
+
+    1.  ##### One Piece - single application/binary
+
+    2.  ##### Single Job - top level definition
+
+        -   Ex. Send rocket to moon,airplane
+
+    3.  Single Autonomous Unit
+
+-   They are still essential when application are written for environment and run  on **local computer**.
+
+-   ##### Microservices must be considered only when the application resides on the cloud and some benefits can be demonstrated by splitting the application in smaller parts.
+
+-   Disadvantage
+
+    1.  ##### Scaling Issues
+
+        -   A modification made to a small section of code might require building  and deploying an entirely new version of software.
+        -    Scaling specific  functions of an application, also means you have to scale the entire  application.
+
+        
+
+-   Monolith application can be divided into model view controller.
+-   **MVC** architecture is based upon monolith.
+
+|      Monolithic Architecture       |
+| :--------------------------------: |
+| Services ( Model View Controller ) |
+|            Repositories            |
+
+
+
+##### Conversion of monolithic architecture to microservice can be done by splitting the model view controller into different entities.
