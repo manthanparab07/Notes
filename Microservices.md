@@ -246,3 +246,218 @@ Communication b/w services can be **synchronous** ( HTTP ) as **REST**   or as a
 
 
 ##### Conversion of monolithic architecture to microservice can be done by splitting the model view controller into different entities.
+
+>   Challenges in microservices
+
+-   The complexity **does not** goes away.
+-   Complexities shift to **operational environment** as
+    1.  services needs to deploy,text and manage many inter-acting services.
+    2.  check for service fails
+
+-   **Monolithic in comparision is less complex**
+    1.  Location of resources are **well known and relatively static **.
+    2.  Monolithic applications are upgraded as a single unit.
+    3.  Deployment involves fewer **monothilic code segments**.
+    4.  They tend to have single database and hard coded configuration file in well known location.
+
+-   **Microsevices complexity shifts to operational environment**
+    1.  Required services could be in different clouds such as **public or private cloud** , VMs , containers, or servers.
+    2.  Operational environment is **dynamic** in nature as it has to work with dynamic number of instances. 
+    3.  Thus it does not have traditional configuration files.
+    4.  Easily upgraded.
+
+-   Challenges of Microservices
+    1.  How to find the service I need?
+        -   Which instance do I use if there are multiple instances?
+    2.  How does the failure of **one service** affect other instances of the same service?
+    3.  How does the failure of one service affect other related services?
+    4.  **Extra Complexity of creating a distributed systems**
+        -   Network Latency
+            -   As more services/instances are launched network latency might become an issue.
+        -   Fault tolerance
+            -   Hardware failure will happen so fault tolerance  is needed.
+        -   Message Serialization
+            -   Ex. difficult to orchestrate a distributed transaction which requires managing correlations IDs and parallelism.
+        -   Maintaining availability and consistency with partition data.
+
+​	
+
+#####  Distributed systems are an order of magnitude more difficult to develop and test against, so again the bar is raised vs building that unsexy monolithic application.
+
+##### Key Concepts
+
+-   ##### Rapid Provisioning
+
+    1.  Ability to **deploy server** in hours i.e **Cloud Computing**.
+    2.  Requires a lot of automation or full automation.
+
+-   ##### Basic Monitoring
+
+    1.  As the number of loosely coupled microservices increase they must be constanly monitored for fault, latency..etc
+
+-   ##### Rapid Application Development(RAD)
+
+    1.  Quikly deploy microservices both in **test and production environment**.
+    2.  **Deployment-Pipeline** is required.
+
+
+
+#### DevOps
+
+-   **Microservices** belong in a **DevOps environment**.
+-   Based on lean and Agile Principles.
+
+| Customer | Agile  | Development | DevOps | Operations |
+| -------- | :----: | ----------- | :----: | ---------- |
+|          | Linked |             | Linked |            |
+
+-   Required For Continous Integration , Continuous Delivery, Continuous Deployment (**CI/CD/CD**).
+
+#### Continuous Delivery
+
+-   A culture of delivering a small, well designed, high quality,increment of software to customers.
+
+#### Continuous Integration
+
+-   Creating a packaged builds of the latest code changes as soon as they they're available.
+-   Release as **immutable** images. Immutable means that the images are not patched in operation environment. If any modifications are needed, the entire components is **replaced** with an upgraded version.
+-   Frequent perform of operations like 
+    1.  Development
+    2.  Source Code Management
+    3.  Build ( to compile and make binaries )
+    4.  Packaged Repository ( contains builds and other assests )
+
+#### Continuous Deployment
+
+-   Progressing each new packaged build through the deployment lifecycle stages as rapidly as possible.
+-   Must have automated tools for deploys.
+-   Stages include
+    1.  Packaged Repo
+    2.  Deploy
+    3.  Test 
+    4.  Stage (Perform Integration Testing)
+    5.  Production ( Make Build available to the user.)
+
+##### Continuous Delivery is achieved through combination of  Continuous Deployment and Continuous Integeration.(CI/CD)
+
+#### Delivery Pipeline
+
+-   It's an automated sequence of steps to perform continous delivery.
+-    Deployment pipelines are a central part of **ContinuousDelivery**.
+-   A deployment pipeline is a way to deal with this by breaking up your build into stages. Each stage provides increasing confidence, usually at the cost of extra time.
+-   It Enables **faster feedback**.
+-   Stages
+    1.  First Stage : 
+        -   compilation and providing binaries for the later stages.
+    2.  Later stages :
+        -   Automatic or manual testing.
+    3.  Final Stage :
+        -   Deploying into production.
+-   More broadly the deployment pipeline's job is to detect any changes that will lead to problems in production.
+-    These can include performance, security, or usability issues. 
+
+
+
+##### Zero downtime deployment
+
+-   Deloying the new version of the application to replace the older version incurring a service outage.
+-   Application is always available, first the old verison and then the new version.
+-   User should not experience an outage or downtime.
+-   Also known as **BLUE GREEN DEPLOYMENT**.
+
+
+
+#### Service Mesh
+
+-   The term service mesh is often used to  describe the **network of microservices ** that make up the applications,  and the interactions between them.
+-   As a service mesh grows in size and complexity,  it can become harder to understand and manage.  
+-   Its requirements can include discovery,  load balancing, failure recovery, metrics and monitoring,  and often more complex operational  requirements such as A/B testing, canary releases,  rate limiting, access control, and end-to-end authentication. 
+-   Ex. **Istio, Netflix OSS**
+
+1.  #### Service Registry
+
+    -   Used for **finding the service, to checks if that service is up and running **.
+    -   It allows to choose between different instances as direct interaction with the services is not possible due to their constant change in locations and count.
+    -   **Service registry** assign service when requested.
+    -   To detect failure each service reports their status after fixed interval of time to service registry also known as **heart beat**.
+    -   If a service failed to report then it is not assigned.
+    -   Also holds location of service.
+
+2.  #### Service Discovery
+
+    -   Uses **Service Registry**.
+
+    -   As there are many instance of the same service, choosing among them can be done through two ways
+
+        -   ##### Client-side discovery : client chooses instance
+
+        -   ##### Server-side discovery: server chooses instance
+
+    -   The main reason for two approach is **Load balancing**.
+
+    -   Server-side -> load balancing.
+
+    -   Client-side has to interact with service registry to make the decision whereas the server side load balancing by decouples the service registry from the client.
+
+    <img src="https://microservices.io/i/servicediscovery/client-side-discovery.jpg">
+
+    -   Ex:
+        -   AWS Elastic Load Balancer (ELB) : server side discovery.
+        -    Netflix OSS : client side discovery
+
+<img src="https://microservices.io/i/servicediscovery/server-side-discovery.jpg">
+
+
+
+3.  #### Circuit Breaker
+
+    -   If the needed microservice isn't available then it must be handled to prevent wider performance impact if requested by too many client result in traffic jam.
+    -   **Circuit breaker** is used and it sends service message so the service can move on and find a new working instance.
+    -   Ex. After a threshold request is reached i.e even after these request the service is not available then the circuit breaker trips and send message without calling the service for the current and all the new request.
+
+    <img src=".attachments/circuit-breaker.png">
+
+4.  ##### Bulkheads
+
+    -   It is used for **isolating failures**.
+    -   Like ships hull which contains several bulkheads so that even if one is flooded damage is limited and not cause entire ship to sinking.
+    -   Ex: if **single connection pool** is used to connect all the other system records then it's failure result in blocking all the connection whereas in bulkheads approach **multiple connection pools** are used to minimize risk and the services are still available though in part. 
+
+#### Key Objectives of a Microservices Architecture
+
+-   Large monolithics are broken down into many small services
+    -   Each service runs in it's own process
+    -   The applicable cloud rule is on **service per container**.
+-   Services are optimized for a single function
+    -   There is only one buisness function per service.
+-   Communication via REST API and message brokers
+    -   Avoid tight coupling introduced by communication through a database
+-   Per service continuous integration and continuous deployment
+    -   Services evolve at different rates
+
+
+
+#### Approaches to decomposing a monothilic application
+
+1.  Intially identify decomposable services and adopt microservices strategy at the begining.
+    -   But this does not help in keeping track record.
+    -   Additional Cost and complexities as why pay the premium until you know that you need it.
+
+2.  Start with monothilic and then break it into microservices.
+
+
+
+##### Refactoring an existing application
+
+-   Each REST services is potentially a microservice.
+
+
+
+<img src="https://martinfowler.com/bliki/images/microservice-verdict/path.png">
+
+-   A more common approach is to start with a monolith and gradually peel off microservices at the edges. Such an approach can leave a substantial monolith at the heart of the microservices architecture, but with most new development occurring in the microservices while the monolith is relatively quiescent.
+-   Another common approach is to just replace the monolith entirely. Few people look at this as an approach to be proud of, yet there are advantages to building a monolith as a [SacrificialArchitecture](https://martinfowler.com/bliki/SacrificialArchitecture.html). Don't be afraid of building a monolith that you will discard, particularly if a monolith can get you to market quickly.
+
+
+
+<img src="https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/pwmiFAIiEeiYRg7EwpNPhA_6d04981b0e3dfbdb5dc077a405787430_Microservices_Architecture_Overview.jpg?expiry=1580774400000&hmac=JHna3dIr31l6QBG4I9HWOkY-_UfwU5cCwvWK6ys8pXU" >
